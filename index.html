@@ -4,34 +4,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue Props Sample</title>
+  <title>Vue Router Sample</title>
 </head>
 
 <body>
   <div id="app">
-    <child-component></child-component>
+    <h1>뷰 라우터 예제</h1>
+    <p>
+      <!-- 1. URL 값을 변경하는 태그 -->
+      <router-link to="/main">Main 컴포넌트로 이동</router-link>
+      <router-link to="/login">Login 컴포넌트로 이동</router-link>
+    </p>
+    <router-view></router-view> <!-- 2. URL 값에 따라 갱신되는 화면 영역 -->
   </div>
 
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.1/dist/vue.js"></script>
+  <!-- 라우터 CDN 추가 -->
+  <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+
   <script>
-    var eventBus = new Vue();
-    Vue.component('child-component', {
-      template: '<div>하위 컴포넌트 영역입니다.<button v-on:click="showLog">show</button></div>',
-      methods: {
-        showLog: function () {
-          eventBus.$emit('triggerEventBus', 100);
-        }
-      }
+    // 3.Main, Login 컴포넌트 정의
+    var Main = { template: '<div>main</div>' };
+    var Login = { template: '<div>login</div>' };
+
+    // 4. 각 URL에 맞춰 표시할 컴포넌트 지정
+    var routes = [
+      { path: '/main/', component: Main },
+      { path: '/login/', component: Login }
+    ];
+
+    // 5. 뷰 라우터 정의
+    var router = new VueRouter({
+      mode: 'history', // remove # for router link address
+      routes
     });
 
+    // 6. 뷰 인터슨터에 라우터 추가
     var app = new Vue({
-      el: '#app',
-      created: function () {
-        eventBus.$on('triggerEventBus', function (value) {
-          console.log("이벤트를 전달받음. 전달받은 값 : ", value);
-        });
-      }
-    });
+      router
+    }).$mount('#app');
   </script>
 </body>
 
