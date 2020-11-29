@@ -1,25 +1,32 @@
-// 할일 #1
-// sibling-component 를 이름으로 갖는 새로운 컴포넌트를 아래에 등록해보세요.
-// options : template, props
-
-
-Vue.component('sibling-component', {
-  props: ['propsdata'],
-  template: '<p>{{ propsdata }}</p>'
-});
-
-Vue.component('child-component', {
-  props: ['propsdata'],
-  template: '<p>{{ propsdata }}</p>'
-});
-
-// 할일 #2
-// data 속성을 1개 더 지정하고 (예: anotherMessage) 임의의 문자열을 값으로 대입해보세요.
-// 새로 지정한 data 속성은 위 sibling-component에 props로 전달합니다.
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue! passed from Parent Component',
-    anotherMessage: 'Hey Vue! This is another message.'
+    message: 'Hello Vue.js',
+    // 할 일 #1
+    // 새로운 데이터 속성을 1개 추가하고, 머스타쉬 {{ }} 데이터 바인딩을 이용하여 화면에 표시해보세요.
+    quizMsg: 'Added data',
+    uid: '20',
+    // 할 일 #2
+    // uid를 변경하고 해당 uid의 변경 여부를 크롬 개발자 도구의 '화면 요소 검사 기능'으로 확인해보세요. p 태그의 id 값을 검사.
+
+    flag: false
+    // 할 일 #4
+    // 위 flag 값을 false로 변경했을 때 화면에 어떤 영향을 주는지 확인해보세요.
+  },
+  methods: {
+    // ES6 문법
+    clickBtn() {
+      console.log("hi");
+    },
+    // ES5 문법 - 위 ES6 문법과 동일한 코드
+    // clickBtn: function() {
+    //   console.log("hi");
+    // }
+
+    // 할 일 #3
+    // eventMethod를 하나 추가하고 index.html의 #3 영역에 해당 이벤트를 실행하는 버튼을 추가하세요.
+    clickTest() {
+      alert('passed');
+    }
   }
 });
